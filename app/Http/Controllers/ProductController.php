@@ -9,13 +9,16 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('admin.product.home');
+        $products =Product::orderby('id', 'desc')->get();
+        $total = Product::count();
+        return view('admin.product.home', compact('products', 'total'));
 
     }
 
     public function create()
     {
         return view('admin.product.create');
+    
     }
 
     public function store(Request $request)
@@ -36,5 +39,35 @@ class ProductController extends Controller
             return redirect(route('admin/product/create'));
         }
     }
+
+    public function edit($id)
+    {
+        $products = Product::findOrFail($id);
+        return view('admin.product.update', compact('products'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $products = Product::findOrFail($id);
+        $title = $request->title;
+        $category = $request->category;
+        $price = $request->price;
+
+        $products->title = $title;
+        $products->category = $category;
+        $products->price = $price;
+        $data = $products->save();
+
+        if($data){
+            session()->flash('success', 'Product updated successfully');
+            return redirect(route('admin/product'));
+        }
+        else{
+            session()->flash('error', 'Product not updated');
+            return redirect(route('admin/product/update'));
+        }
+    
+    }
+
 
 }

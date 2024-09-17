@@ -25,6 +25,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/product', [ProductController::class, 'index']) -> name('admin/product');
     Route::get('/admin/product/create', [ProductController::class, 'create']) -> name('admin/product/create');
     Route::post('/admin/product/save', [ProductController::class, 'store']) -> name('admin/product/save');
+    Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit']) -> name('admin/product/edit');
+    Route::put('/admin/product/update/{id}', [ProductController::class, 'update']) -> name('admin/product/update');
+
 });
 
 require __DIR__.'/auth.php';
