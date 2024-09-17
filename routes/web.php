@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,8 +19,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('admin/dashboard', [HomeController::class, 'index']);
+    Route::get('/admin/product', [ProductController::class, 'index']) -> name('admin/product');
+});
+
 require __DIR__.'/auth.php';
 
-Route::get('admin/dashboard', [HomeController::class, 'index']);
-Route::get('admin/dashboard', [HomeController::class, 'index']) -> middleware(['auth', 'admin']);
+// Route::get('admin/dashboard', [HomeController::class, 'index']);
+// Route::get('admin/dashboard', [HomeController::class, 'index']) -> middleware(['auth', 'admin']);
 
