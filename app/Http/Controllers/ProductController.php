@@ -39,6 +39,21 @@ class ProductController extends Controller
             return redirect(route('admin/product/create'));
         }
     }
+    public function delete($id)
+    {
+        $products = Product::findOrFail($id);
+
+        if($products->delete()){
+            session()->flash('success', 'Product deleted successfully');
+            return redirect()-> route('admin/product');
+            
+        }
+        else{
+            session()->flash('error', 'Product not deleted');
+            return redirect()-> route('admin/product/');
+        }
+        
+    }   
 
     public function edit($id)
     {
