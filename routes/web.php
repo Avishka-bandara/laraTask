@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminDashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +29,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit']) -> name('admin/product/edit');
     Route::put('/admin/product/update/{id}', [ProductController::class, 'update']) -> name('admin/product/update');
     Route::delete('/admin/product/delete/{id}', [ProductController::class, 'delete']) -> name('admin/product/delete');
+    
+    
 
 
 });
