@@ -27,11 +27,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/product/save', [ProductController::class, 'store']) -> name('admin/product/save');
     Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit']) -> name('admin/product/edit');
     Route::put('/admin/product/update/{id}', [ProductController::class, 'update']) -> name('admin/product/update');
+    Route::delete('/admin/product/delete/{id}', [ProductController::class, 'delete']) -> name('admin/product/delete');
+
 
 });
 
 require __DIR__.'/auth.php';
 
-// Route::get('admin/dashboard', [HomeController::class, 'index']);
-// Route::get('admin/dashboard', [HomeController::class, 'index']) -> middleware(['auth', 'admin']);
+
 

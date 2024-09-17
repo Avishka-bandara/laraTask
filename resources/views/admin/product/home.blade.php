@@ -38,8 +38,12 @@
                                     <td class="align-middle">{{ $product->price }}</td>
                                     <td class="align-middle">
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('admin/product/edit' , ['id'=>$product->id])}}" type="button" class="btn btn-secondary">Edit</a>
-                                            <a href="" type="button" class="btn btn-danger">Delete</a> 
+                                            <a href="{{ route('admin/product/edit' , ['id'=>$product->id ] )}}" type="button" class="btn btn-secondary">Edit</a>
+                                            <form action="{{ route('admin/product/delete', ['id' => $product->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
