@@ -23,6 +23,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('admin/dashboard', [HomeController::class, 'index']);
     Route::get('/admin/product', [ProductController::class, 'index']) -> name('admin/product');
+    Route::get('/admin/product/create', [ProductController::class, 'create']) -> name('admin/product/create');
+    Route::post('/admin/product/save', [ProductController::class, 'store']) -> name('admin/product/save');
 });
 
 require __DIR__.'/auth.php';
